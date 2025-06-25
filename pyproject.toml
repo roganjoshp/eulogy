@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eulogy"
+authors = [
+    {"name" = "Josh Pilkington", "email" = "j.pilkington@hotmail.com"},
+]
+version = "0.0.1"
+description = "A logging and code tracing library"
+
+readme = "README.md"
+requires-python = ">=3.9"
+
+[tool.ruff]
+src = ["src"]
+fix = true
+line-length = 79
+indent-width = 4
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    "B",  # flake8-bugbear
+    "E",  # pycodestyle error
+    "F",  # pyflakes
+    "I",  # isort
+    "UP", # pyupgrade
+    "W",  # pycodestyle warning
+]
+ignore-init-module-imports = true
+
+[tool.ruff.lint.isort]
+force-single-line = false
+order-by-type = true

@@ -1,6 +1,7 @@
 import os
 import traceback
 
+from collections import deque
 from contextlib import redirect_stderr
 
 
@@ -16,8 +17,8 @@ class _Singleton(type):
 
 class _Eulogy(metaclass=_Singleton):
     
-    def __init__(self):
-        self._epitaph = []
+    def __init__(self, maxlen=None):
+        self._epitaph = deque(maxlen=maxlen)
     
     def add(self, 
             item: str):
