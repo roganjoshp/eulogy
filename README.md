@@ -1,2 +1,4 @@
-# ds-python-logging
-A mini package to register `atexit` logging. Currently log files are cluttered with `stdout` and `stderr` messages and it can be hard when coming to a new project to understand the flow of a program to trace the issue. `eulogy` allows custom messages and function calls to be logged in order right at the point the interpreter crashes.
+# Introduction
+A number of platforms, typically related to Data Science and its friends, automatically pipe _everything_ (`stdout`, `stderr`, build commands of containers, Java messages in the case of, e.g. Spark) into a single file. This can make it difficult to find debugging information for your program, where custom `print()` messages are scattered throughout a _lot_ of noise.
+
+That's the issue that `eulogy` aims to alleviate. Unlike official `logging`, it stores a history of logged messages, function calls and tracebacks that will only be reported via `stdout` _right at the point that the program crashes_. This means that, regardless of all the other information being dumped into the log file that you can't control, you will receive an uninterrupted/consolidated report of whatever you chose to trace, right at the end of the log file. You just need to look for the eulogy recital in the log file (RIP program).

@@ -1,4 +1,4 @@
-__version__ = '0.0.2'
+__version__ = "0.0.2"
 
 from .eulogy import _Eulogy
 
@@ -14,8 +14,9 @@ def eulogise(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         module = inspect.getmodule(func).__name__
-        eulogy.add(f'Function: {func.__name__} \t Module: {module}')
+        eulogy.add(f"Function: {func.__name__} \t Module: {module}")
         return func(*args, **kwargs)
+
     return wrapper
 
 

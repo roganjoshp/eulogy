@@ -8,7 +8,8 @@ def test_decorator(func):
     def wrapper(*args, **kwargs):
         print("__ test __")
         return func(*args, **kwargs)
-    return wrapper 
+
+    return wrapper
 
 
 @eulogise
