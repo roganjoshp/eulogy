@@ -1,5 +1,6 @@
 __version__ = "0.0.2"
 
+from .config import Config
 from .eulogy import _Eulogy
 
 import atexit
