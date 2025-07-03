@@ -28,12 +28,15 @@ class _Eulogy(metaclass=_Singleton):
 
     def add(self, item: str):
         if not self.config.ignore_manual:
-            self._epitaph.append(f"[{dt.datetime.utcnow()}] " + item)
+            self._epitaph.append(
+                f"[{dt.datetime.now(dt.timezone.utc)}] " + item
+            )
 
     def add_tb(self):
         if not self.config.ignore_tracebacks:
             self._epitaph.append(
-                f"[{dt.datetime.utcnow()}]\n" + traceback.format_exc()
+                f"[{dt.datetime.now(dt.timezone.utc)}]\n"
+                + traceback.format_exc()
             )
 
     def recite(self, force: bool = False):
@@ -42,7 +45,7 @@ class _Eulogy(metaclass=_Singleton):
         Parameters
         ----------
         force : bool, optional
-            When set to True, the contents can be printed on demand without any 
+            When set to True, the contents can be printed on demand without any
             traceback, by default False
         """
 

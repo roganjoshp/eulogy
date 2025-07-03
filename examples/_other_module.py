@@ -12,7 +12,7 @@ def test_decorator(func):
     return wrapper
 
 
-@eulogise()
+@eulogise(["thing 1", "thing 2"])
 @test_decorator
 def test_function():
     return 5

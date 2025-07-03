@@ -12,16 +12,7 @@ from typing import List, Optional
 eulogy = _Eulogy()
 
 
-def eulogise(tags: Optional[List] = None, config: Config = Config()):
-    """Decorator to log function calls, with optional additional tags
-
-    _extended_summary_
-
-    Parameters
-    ----------
-    tags : _type_, optional
-        _description_, by default None
-    """
+def eulogise(tags: Optional[List] = None, config=Config()):
     def decorator(func):
         @functools.wraps(func)
         def add_function_log(*args, **kwargs):
@@ -29,12 +20,13 @@ def eulogise(tags: Optional[List] = None, config: Config = Config()):
                 module = inspect.getmodule(func).__name__
                 log = f"Function: {module}.{func.__name__}"
                 if tags is not None:
-                    tags = "".join(tags)
-                    log = " ".join(log, " ", tags)
+                    joined_tags = ", ".join(tags)
+                    log = " ".join([log, "[TAGS]", joined_tags])
                 eulogy.add(log)
-                    
             return func(*args, **kwargs)
+
         return add_function_log
+
     return decorator
 
 

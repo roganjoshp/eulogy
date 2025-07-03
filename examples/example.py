@@ -10,6 +10,7 @@ def my_func():
     something_important = 2
     return something_important
 
+
 test_function()
 
 time.sleep(0.1)

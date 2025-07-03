@@ -22,7 +22,7 @@ class Config:
         ignore_manual : bool
             Prevent manual messages being reported, by default False
         ignore_tracebacks : bool
-            Prevent *handled* error tracebacks from appearing in the report, by 
+            Prevent *handled* error tracebacks from appearing in the report, by
             default False
         """
         self.max_report_length = max_report_length
