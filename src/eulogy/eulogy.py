@@ -22,9 +22,12 @@ class _Singleton(type):
 
 
 class _Eulogy(metaclass=_Singleton):
-    def __init__(self, config: Optional[Config] = Config()):
-        self.config = config
+    def __init__(self):
+        self.config = Config()
         self._epitaph = deque(maxlen=self.config.max_report_length)
+        
+    def set_config(self, config: Config):
+        self.config = config
 
     def add(self, item: str):
         if not self.config.ignore_manual:

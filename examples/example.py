@@ -1,7 +1,9 @@
-from eulogy import eulogy, eulogise
+from eulogy import Config, eulogy, eulogise
 from _other_module import test_function
 import time
 
+config = Config()
+eulogy.set_config(config)
 eulogy.add("Test 1")
 
 

@@ -12,11 +12,11 @@ from typing import List, Optional
 eulogy = _Eulogy()
 
 
-def eulogise(tags: Optional[List] = None, config=Config()):
+def eulogise(tags: Optional[List] = None):
     def decorator(func):
         @functools.wraps(func)
         def add_function_log(*args, **kwargs):
-            if not config.ignore_functions:
+            if not eulogy.config.ignore_functions:
                 module = inspect.getmodule(func).__name__
                 log = f"Function: {module}.{func.__name__}"
                 if tags is not None:
