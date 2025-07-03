@@ -5,7 +5,6 @@ import datetime as dt
 
 from collections import deque
 from contextlib import redirect_stderr
-from datetime import tzinfo
 from typing import Optional
 
 from .config import Config
@@ -25,7 +24,7 @@ class _Singleton(type):
 class _Eulogy(metaclass=_Singleton):
     def __init__(self, config: Optional[Config] = Config()):
         self.config = config
-        self._epitaph = deque(maxlen=self.config.max_log_length)
+        self._epitaph = deque(maxlen=self.config.max_report_length)
 
     def add(self, item: str):
         if not self.config.ignore_manual:
@@ -34,7 +33,7 @@ class _Eulogy(metaclass=_Singleton):
     def add_tb(self):
         if not self.config.ignore_tracebacks:
             self._epitaph.append(
-                f"[{dt.datetime.utcnow()}] \n" + traceback.format_exc()
+                f"[{dt.datetime.utcnow()}]\n" + traceback.format_exc()
             )
 
     def recite(self, force: bool = False):
@@ -43,8 +42,8 @@ class _Eulogy(metaclass=_Singleton):
         Parameters
         ----------
         force : bool, optional
-            When set to True, the contents can be printed on demand,
-            by default False
+            When set to True, the contents can be printed on demand without any 
+            traceback, by default False
         """
 
         if force and not self._epitaph:
