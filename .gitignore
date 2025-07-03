@@ -134,13 +134,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Internally-compiled stuff
-*.json
-!src/beatroute/geo/postcodes/gb_postcodes.json
-.ruby-version
-delete_me.py
-
-# gmon.out
-gmon.out
-my_route.html
-routes_map.html
+# Custom
+*delete_me.py

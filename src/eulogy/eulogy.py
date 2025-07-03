@@ -1,8 +1,14 @@
 import os
 import traceback
 
+import datetime as dt
+
 from collections import deque
 from contextlib import redirect_stderr
+from datetime import tzinfo
+from typing import Optional
+
+from .config import Config
 
 
 class _Singleton(type):
@@ -17,11 +23,19 @@ class _Singleton(type):
 
 
 class _Eulogy(metaclass=_Singleton):
-    def __init__(self, maxlen=None):
-        self._epitaph = deque(maxlen=maxlen)
+    def __init__(self, config: Optional[Config] = Config()):
+        self.config = config
+        self._epitaph = deque(maxlen=self.config.max_log_length)
 
     def add(self, item: str):
-        self._epitaph.append(item)
+        if not self.config.ignore_manual:
+            self._epitaph.append(f"[{dt.datetime.utcnow()}] " + item)
+
+    def add_tb(self):
+        if not self.config.ignore_tracebacks:
+            self._epitaph.append(
+                f"[{dt.datetime.utcnow()}] \n" + traceback.format_exc()
+            )
 
     def recite(self, force: bool = False):
         """Prints the contents of the log
@@ -43,8 +57,9 @@ class _Eulogy(metaclass=_Singleton):
                         with redirect_stderr(f):
                             traceback.print_last()
                 print()
-                print("##### RECITAL #####")
+                print("--- RECITAL ---")
                 for row in self._epitaph:
                     print(row)
             except ValueError:
+                # Error stack is empty so ignore logged events
                 pass
