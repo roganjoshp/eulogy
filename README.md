@@ -106,7 +106,7 @@ In case multiple runs are merged into a single log file, you can mark function c
 ```python
 from eulogy import eulogise
 
-@eulogise(tags=["Run 1", "Meaning of life])
+@eulogise(tags=["Run 1", "Meaning of life"])
 def some_func():
     return 42
 
