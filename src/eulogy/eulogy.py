@@ -28,6 +28,15 @@ class _Eulogy(metaclass=_Singleton):
         
     def set_config(self, config: Config):
         self.config = config
+        # Since the class was instantiated with a deque already,
+        # we might need to copy over the existing log here and
+        # truncate to the new length
+        self._epitaph.rotate(config.max_report_length)
+        old_epitaph = list(self._epitaph)[:config.max_report_length]
+        new_epitaph = deque(maxlen=self.config.max_report_length)
+        for item in old_epitaph:
+            new_epitaph.append(item)
+        self._epitaph = new_epitaph
 
     def add(self, item: str):
         if not self.config.ignore_manual:

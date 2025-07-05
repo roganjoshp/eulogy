@@ -13,7 +13,8 @@ description = "A logging and code tracing library"
 readme = "README.md"
 requires-python = ">=3.7"
 
-dependencies=["ruff"]
+[project.optional-dependencies]
+dev = ["pytest", "ruff"]
 
 [tool.ruff]
 src = ["src"]

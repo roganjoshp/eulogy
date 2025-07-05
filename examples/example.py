@@ -7,7 +7,7 @@ eulogy.set_config(config)
 eulogy.add("Test 1")
 
 
-@eulogise()
+@eulogise(tags=["a", "b"])
 def my_func():
     something_important = 2
     return something_important
