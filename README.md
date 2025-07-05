@@ -103,7 +103,7 @@ It is possible to turn off reporting in any portion of the program by re-definin
 
 ## Tags
 In case multiple runs are merged into a single log file, you can mark function calls with custom messages for easier searching. So, for example:
-```
+```python
 from eulogy import eulogise
 
 @eulogise(tags=["Run 1", "Meaning of life])
