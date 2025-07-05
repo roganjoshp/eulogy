@@ -23,6 +23,14 @@ def _test_function_2():
     return
 
 
+def test_handled_exceptions():
+    try:
+        int("a")
+    except ValueError:
+        pass
+    assert len(eulogy._epitaph) == 0
+
+
 def test_manual_reporting():
     eulogy.add("xyz")
     with pytest.raises(ValueError):
