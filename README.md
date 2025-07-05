@@ -52,7 +52,7 @@ eulogy.add("This seems like fun")
 if __name__ == "__main__":
     some_func()
 ```
-This gives no output because there is nothing to report. But what if we wanted to see it anyway? You can force a printout of the eulogy contents at any time. Forcing the output does **not** clear the eulogy deque so it won't affect the output on an actual crash later on.
+This gives no output because there is nothing to report; nothing crashed. But what if we wanted to see the report anyway? You can force a printout of the eulogy contents at any time. Forcing the output does **not** clear the eulogy deque so it won't affect the output on an actual crash later on.
 ```python
 if __name__ == "__main__":
     some_func()
@@ -81,4 +81,36 @@ if __name__ == "__main__":
     some_func() # This will still work
     eulogy.add("Still looks good")
     other_func() # Crash the program and trigger output
+```
+
+## Further Configuration
+There is a config object for fine-tuning reporting if it's needed for your output. It can be used to turn off certain reocrded events. Creating the config with its default params is below.
+
+```python
+from eulogy import eulogy
+from eulogy.config import Config
+
+config = Config(
+    max_report_length=50,
+    ignore_functions=False,
+    ignore_manual=False,
+    ignore_tracebacks=False
+)
+
+eulogy.set_config(config)
+```
+It is possible to turn off reporting in any portion of the program by re-defining config and then set it back on later.
+
+## Tags
+In case multiple runs are merged into a single log file, you can mark function calls with custom messages for easier searching. So, for example:
+```
+from eulogy import eulogise
+
+@eulogise(tags=["Run 1", "Meaning of life])
+def some_func():
+    return 42
+
+some_func()
+# Crash the program
+int("a")
 ```

@@ -55,14 +55,14 @@ class _Eulogy(metaclass=_Singleton):
         Whilst the code might have handled the exception and moved on, it
         might be worth keeping a record of the handled errors along the
         way to the program's ultimate demise.
-        
+
         It's simply used as such:
         try:
             int('a')
         except Exception:
             eulogy.add_tb()
-            pass
-        
+            <whatever actions here>
+
         It will then appear in the final recital
         """
         if not self.config.ignore_tracebacks:

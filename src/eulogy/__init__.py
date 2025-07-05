@@ -1,6 +1,6 @@
 __version__ = "0.0.2"
 
-from .eulogy import Config, _Eulogy
+from .eulogy import _Eulogy
 
 import atexit
 import functools
