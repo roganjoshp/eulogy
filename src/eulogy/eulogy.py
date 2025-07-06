@@ -31,15 +31,17 @@ class _Eulogy(metaclass=_Singleton):
         Args:
             config (Config): a Config object with overridden defaults
         """
+        old_len = self.config.max_report_length
         self.config = config
         # Since the class was instantiated with a deque already, we might need
         # to copy over the existing log here and truncate to the new length
-        self._epitaph.rotate(config.max_report_length)
-        old_epitaph = list(self._epitaph)[: config.max_report_length]
-        new_epitaph = deque(maxlen=self.config.max_report_length)
-        for item in old_epitaph:
-            new_epitaph.append(item)
-        self._epitaph = new_epitaph
+        if old_len != config.max_report_length:
+            self._epitaph.rotate(config.max_report_length)
+            old_epitaph = list(self._epitaph)[: config.max_report_length]
+            new_epitaph = deque(maxlen=self.config.max_report_length)
+            for item in old_epitaph:
+                new_epitaph.append(item)
+            self._epitaph = new_epitaph
 
     def add(self, item: str):
         """Add a custom message to the final report
