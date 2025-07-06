@@ -1,6 +1,8 @@
-from eulogy import Config, eulogy, eulogise
-from _other_module import test_function
 import time
+
+from _other_module import test_function
+
+from eulogy import Config, eulogise, eulogy
 
 config = Config()
 eulogy.set_config(config)

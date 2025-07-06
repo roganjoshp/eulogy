@@ -1,7 +1,8 @@
-from eulogy import eulogy, eulogise, Config
 from collections import deque
+
 import pytest
 
+from eulogy import Config, eulogise, eulogy
 
 DEFAULT_CONFIG = Config()
 
@@ -34,7 +35,7 @@ def test_handled_exceptions():
 def test_manual_reporting():
     eulogy.add("xyz")
     with pytest.raises(ValueError):
-        a = int("a")
+        int("a")
     assert "xyz" in eulogy._epitaph[0]
     assert len(eulogy._epitaph) == 1
 
@@ -42,7 +43,7 @@ def test_manual_reporting():
 def test_function_reporting():
     _test_function_1()
     with pytest.raises(ValueError):
-        a = int("a")
+        int("a")
     assert "_test_function_1" in eulogy._epitaph[0]
     assert len(eulogy._epitaph) == 1
 
@@ -74,7 +75,7 @@ def test_turn_off_manual():
     eulogy.set_config(config)
     eulogy.add("Something")
     with pytest.raises(ValueError):
-        a = int("a")
+        int("a")
     assert len(eulogy._epitaph) == 0
 
 

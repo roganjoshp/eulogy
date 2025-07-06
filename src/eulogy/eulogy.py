@@ -1,8 +1,6 @@
+import datetime as dt
 import os
 import traceback
-
-import datetime as dt
-
 from collections import deque
 from contextlib import redirect_stderr
 
@@ -14,9 +12,7 @@ class _Singleton(type):
 
     def __call__(cls, *args, **kwargs):
         if cls not in cls._instances:
-            cls._instances[cls] = super(_Singleton, cls).__call__(
-                *args, **kwargs
-            )
+            cls._instances[cls] = super().__call__(*args, **kwargs)
         return cls._instances[cls]
 
 

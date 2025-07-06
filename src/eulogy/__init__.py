@@ -1,13 +1,12 @@
 __version__ = "0.0.2"
 
-from .eulogy import _Eulogy, Config
-
 import atexit
 import functools
 import inspect
-
 from typing import List, Optional
 
+from .eulogy import Config as Config
+from .eulogy import _Eulogy
 
 eulogy = _Eulogy()
 
