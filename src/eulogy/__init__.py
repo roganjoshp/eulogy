@@ -1,6 +1,6 @@
 __version__ = "0.0.2"
 
-from .eulogy import _Eulogy
+from .eulogy import _Eulogy, Config
 
 import atexit
 import functools
@@ -13,6 +13,14 @@ eulogy = _Eulogy()
 
 
 def eulogise(tags: Optional[List] = None):
+    """Function decorator to record function calls
+
+    Args:
+        tags (Optional[List], optional): An optional list of string data to be
+        recorded with the function call. This could be useful in cases where
+        multiple runs are being piped to a single file. Defaults to None.
+    """
+
     def decorator(func):
         @functools.wraps(func)
         def add_function_log(*args, **kwargs):

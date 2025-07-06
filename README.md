@@ -1,7 +1,7 @@
 # Introduction
 A number of platforms, typically related to Data Science and its friends, automatically pipe _everything_ (`stdout`, `stderr`, build commands of containers, Java messages in the case of, e.g. Spark) into a single file. This can make it difficult to find debugging information for your program, where custom `print()` messages are scattered throughout a _lot_ of noise.
 
-That's the issue that `eulogy` aims to alleviate. Unlike official `logging`, it stores a history of messages, function calls and tracebacks that will only be reported via `stdout` **right at the point that the program crashes**. This means that, regardless of all the other information being dumped into the log file that you can't control, you will receive an uninterrupted/consolidated report of whatever you chose to trace, right at the end of the log file. You just need to look for the recital right at the end of the log file (RIP program).
+That's the issue that `eulogy` aims to alleviate. Unlike traditional `logging`, it stores a history of messages, function calls and tracebacks that will only be reported via `stdout` **right at the point that the program crashes**. This means that, regardless of all the other information being dumped into the log file that you can't control, you will receive an uninterrupted/consolidated report of whatever you chose to trace, right at the end of the log file. You just need to look for the recital right at the end of the log file (RIP program). It is therefore not a replacement for traditional logging but, rather, a debugging aid.
 
 # Usage
 
@@ -80,11 +80,11 @@ eulogy.add("This seems like fun")
 if __name__ == "__main__":
     some_func() # This will still work
     eulogy.add("Still looks good")
-    other_func() # Crash the program and trigger output
+    other_func() # Crash the program and trigger the recital
 ```
 
 ## Further Configuration
-There is a config object for fine-tuning reporting if it's needed for your output. It can be used to turn off certain reocrded events. Creating the config with its default params is below.
+There is a config object for fine-tuning reporting if it's needed for your output. It can be used to turn off certain reocrded events. Creating the config with its default params is demonstrated below.
 
 ```python
 from eulogy import eulogy
@@ -99,7 +99,7 @@ config = Config(
 
 eulogy.set_config(config)
 ```
-It is possible to turn off reporting in any portion of the program by re-defining config and then set it back on later.
+It is possible to turn off reporting in any portion of the program by re-defining config and then set it back on later. You can use `.set_config()` as many times as desired throughout the program. The `max_report_length` is implemented as a queue to report the last `n` number of events, which by default is 50 to not consume inordinate amounts of memory in cases where there might be tight loops or very stable programs accumulating reported events indefinitely. However, you can set this to `None` to create an infinitely expanding record.
 
 ## Tags
 In case multiple runs are merged into a single log file, you can mark function calls with custom messages for easier searching. So, for example:
@@ -114,3 +114,6 @@ some_func()
 # Crash the program
 int("a")
 ```
+
+## Contributing
+The project is currently in Beta and all contributions, bug reports, bug fixes, documentation improvements, enhancements, and ideas are welcome. This is a project that is hard to test across platforms that require paid access, which I don't currently have and indeed some are proprietary platforms for individual companies.

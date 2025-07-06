@@ -26,10 +26,18 @@ class _Eulogy(metaclass=_Singleton):
         self._epitaph = deque(maxlen=self.config.max_report_length)
 
     def set_config(self, config: Config):
+        """Dynamically override the default config
+
+        The config object can be replaced as many times as required to
+        optionally prevent certain events being recorded in different portions
+        of the code
+
+        Args:
+            config (Config): a Config object with overridden defaults
+        """
         self.config = config
-        # Since the class was instantiated with a deque already,
-        # we might need to copy over the existing log here and
-        # truncate to the new length
+        # Since the class was instantiated with a deque already, we might need
+        # to copy over the existing log here and truncate to the new length
         self._epitaph.rotate(config.max_report_length)
         old_epitaph = list(self._epitaph)[: config.max_report_length]
         new_epitaph = deque(maxlen=self.config.max_report_length)
@@ -41,8 +49,8 @@ class _Eulogy(metaclass=_Singleton):
         """Add a custom message to the final report
 
         Args:
-            item (str): Whatever string you want to be included in the
-            final output
+            item (str): Whatever string you want to be included in the final
+            output
         """
         if not self.config.ignore_manual:
             self._epitaph.append(
@@ -52,9 +60,9 @@ class _Eulogy(metaclass=_Singleton):
     def add_tb(self):
         """Automatically create a formatted record of any handled traceback
 
-        Whilst the code might have handled the exception and moved on, it
-        might be worth keeping a record of the handled errors along the
-        way to the program's ultimate demise.
+        Whilst the code might have handled the exception and moved on, it might
+        be worth keeping a record of the handled errors along the way to the
+        program's ultimate demise.
 
         It's simply used as such:
         try:
