@@ -7,7 +7,7 @@ name = "eulogy"
 authors = [
     {"name" = "Josh Pilkington", "email" = "j.pilkington@hotmail.com"},
 ]
-version = "0.2.1"
+version = "0.2.2"
 description = "A logging and code tracing library"
 
 readme = "README.md"
@@ -21,6 +21,9 @@ license-files = ["LICEN[CS]E*"]
 
 [project.optional-dependencies]
 dev = ["pytest", "ruff"]
+
+[project.urls]
+Source = "https://github.com/pallets/flask/"
 
 [tool.ruff]
 src = ["src"]
